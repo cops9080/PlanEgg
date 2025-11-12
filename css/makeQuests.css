@@ -1,0 +1,86 @@
+
+
+background {
+width: 364px;
+height: 638px;
+flex-shrink: 0;
+
+
+
+border-radius: 14px;
+border: 0.667px solid #E5E7EB;
+background: #FFF;
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
+}
+
+sword_icon {
+width: 20px;
+height: 20px;
+flex-shrink: 0;
+
+/* <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+  <path d="M9.16663 15.8334L4.16663 10.8334" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M4.16667 17.5L2.5 15.8334" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M6.66671 13.3334L3.33337 16.6667" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M7.91663 14.5833L17.5 5V2.5H15L5.41663 12.0833" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> */
+}
+
+
+header {
+color: #000;
+font-family: Arimo;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 16px; /* 100% */
+
+/* 오늘의 PLAN */
+}
+
+textbox {display: flex;
+width: 327px;
+height: 36px;
+padding: 4px 12px;
+align-items: center;
+flex-shrink: 0;
+
+border-radius: 8px;
+border: 0.667px solid #D1D5DC;
+background: #FFF;}
+
+dropdown_left
+{display: flex;
+height: 36px;
+padding: 0 12px;
+justify-content: space-between;
+align-items: center;
+
+border-radius: 8px;
+border: 0.667px solid #D1D5DC;
+background: #FFF;}
+
+
+
+dropdown_right {display: flex;
+height: 36px;
+padding: 0 12px;
+justify-content: space-between;
+align-items: center;
+
+border-radius: 8px;
+border: 0.667px solid #D1D5DC;
+background: #FFF;}
+
+
+add_button{display: flex;
+width: 327px;
+padding: 7px 130px 9px 105px;
+align-items: flex-end;
+gap: 9px;
+
+
+border-radius: 8px;
+background: #B0E53F;
+}
+
