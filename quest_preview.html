@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,7 @@
             border: 0.667px solid #E5E7EB;
             background: #FFF;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
-            
+
             /* Added for layout */
             display: flex;
             flex-direction: column;
@@ -39,7 +40,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            width: 327px; /* Align with other elements */
+            width: 327px;
+            /* Align with other elements */
         }
 
         .sword_icon {
@@ -57,22 +59,22 @@
             font-size: 16px;
             font-style: normal;
             font-weight: 400;
-            line-height: 16px; /* 100% */
+            line-height: 16px;
+            /* 100% */
         }
 
         .textbox {
-            display: flex;
             width: 327px;
             height: 36px;
             padding: 4px 12px;
-            align-items: center;
-            flex-shrink: 0;
             border-radius: 8px;
             border: 0.667px solid #D1D5DC;
             background: #FFF;
             box-sizing: border-box;
             color: #333;
             font-size: 14px;
+            font-family: inherit;
+            /* Inherit font from body */
         }
 
         .dropdown-row {
@@ -91,7 +93,8 @@
             border: 0.667px solid #D1D5DC;
             background: #FFF;
             box-sizing: border-box;
-            width: 48%; /* Guessing width */
+            width: 48%;
+            /* Guessing width */
             font-size: 14px;
             color: #555;
         }
@@ -106,7 +109,8 @@
             border: 0.667px solid #D1D5DC;
             background: #FFF;
             box-sizing: border-box;
-            width: 48%; /* Guessing width */
+            width: 48%;
+            /* Guessing width */
             font-size: 14px;
             color: #555;
         }
@@ -116,14 +120,18 @@
             width: 327px;
             /* padding: 7px 130px 9px 105px;  This padding is huge and might break layout if box-sizing isn't border-box or if width is fixed. 
                Let's adjust it to be centered content for now or keep it but use box-sizing */
-            height: 40px; /* Inferred height from padding + content? Or just let padding define it. */
-            padding: 10px; /* Resetting padding for better centering in preview, or I should respect the user's padding? 
+            height: 40px;
+            /* Inferred height from padding + content? Or just let padding define it. */
+            padding: 10px;
+            /* Resetting padding for better centering in preview, or I should respect the user's padding? 
                               User padding: 7px top, 130px right, 9px bottom, 105px left. 
                               105 + 130 = 235px horizontal padding. 
                               327 - 235 = 92px available for content. 
                               It seems specific. I will try to respect it but add box-sizing. */
-            align-items: center; /* Changed from flex-end to center for text */
-            justify-content: center; /* Center text */
+            align-items: center;
+            /* Changed from flex-end to center for text */
+            justify-content: center;
+            /* Center text */
             gap: 9px;
             border-radius: 8px;
             background: #B0E53F;
@@ -134,24 +142,27 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="background">
         <div class="header-container">
             <div class="sword_icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9.16663 15.8334L4.16663 10.8334" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M4.16667 17.5L2.5 15.8334" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.66671 13.3334L3.33337 16.6667" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M7.91663 14.5833L17.5 5V2.5H15L5.41663 12.0833" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9.16663 15.8334L4.16663 10.8334" stroke="#9810FA" stroke-width="1.66667"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.16667 17.5L2.5 15.8334" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M6.66671 13.3334L3.33337 16.6667" stroke="#9810FA" stroke-width="1.66667"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.91663 14.5833L17.5 5V2.5H15L5.41663 12.0833" stroke="#9810FA" stroke-width="1.66667"
+                        stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </div>
             <div class="header">오늘의 PLAN</div>
         </div>
 
-        <div class="textbox">
-            Input text here...
-        </div>
+        <input class="textbox" type="text" placeholder="Input text here...">
 
         <div class="dropdown-row">
             <div class="dropdown_left">Option A ▾</div>
@@ -164,4 +175,5 @@
     </div>
 
 </body>
+
 </html>

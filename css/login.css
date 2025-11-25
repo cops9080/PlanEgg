@@ -1,0 +1,128 @@
+:root {
+    --brand-color: #ade632;
+    --placeholder-color: #d1d5dc;
+    --card-border-color: #e5e7eb;
+    --card-bg-color: #ffffff;
+    --page-bg-color: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--page-bg-color);
+    color: #333;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 393px;
+    margin: 0 auto;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 342px;
+    background-color: var(--card-bg-color);
+    border-radius: 14px;
+    border: 0.67px solid var(--card-border-color);
+    box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 23px 39px 41px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.brand-logo {
+    color: var(--brand-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    line-height: 48px;
+    text-align: center;
+    margin: 0 0 68px 0;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 56px;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.form-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--brand-color);
+    padding-bottom: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    background-color: transparent;
+    color: #333;
+}
+
+.form-input::placeholder {
+    color: var(--placeholder-color);
+    opacity: 1;
+}
+
+.form-input:focus {
+    outline: none;
+    border-bottom-color: #8cb828;
+    /* A darker shade for focus */
+}
+
+.actions-container {
+    width: 100%;
+    margin-top: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-button {
+    color: var(--brand-color);
+    font-family: 'Inria Sans', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 4px;
+}
+
+.signup-link {
+    color: var(--brand-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    text-decoration: none;
+    align-self: flex-end;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
