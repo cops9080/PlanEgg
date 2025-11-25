@@ -64,17 +64,18 @@
         }
 
         .textbox {
+            display: flex;
             width: 327px;
             height: 36px;
             padding: 4px 12px;
+            align-items: center;
+            flex-shrink: 0;
             border-radius: 8px;
             border: 0.667px solid #D1D5DC;
             background: #FFF;
             box-sizing: border-box;
             color: #333;
             font-size: 14px;
-            font-family: inherit;
-            /* Inherit font from body */
         }
 
         .dropdown-row {
@@ -162,7 +163,9 @@
             <div class="header">오늘의 PLAN</div>
         </div>
 
-        <input class="textbox" type="text" placeholder="Input text here...">
+        <div class="textbox">
+            Input text here...
+        </div>
 
         <div class="dropdown-row">
             <div class="dropdown_left">Option A ▾</div>
