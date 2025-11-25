@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quest Preview</title>
+    <link rel="stylesheet" href="../static/css/quest_preview.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="header-container">
+            <div class="sword_icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M9.16663 15.8334L4.16663 10.8334" stroke="#9810FA" stroke-width="1.66667"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.16667 17.5L2.5 15.8334" stroke="#9810FA" stroke-width="1.66667" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M6.66671 13.3334L3.33337 16.6667" stroke="#9810FA" stroke-width="1.66667"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M7.91663 14.5833L17.5 5V2.5H15L5.41663 12.0833" stroke="#9810FA" stroke-width="1.66667"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <div class="header">오늘의 PLAN</div>
+        </div>
+
+        <input type="text" class="textbox" placeholder="Input text here..." maxlength="15">
+
+        <div class="dropdown-row">
+            <!-- Difficulty Dropdown -->
+            <div class="dropdown-wrapper" id="difficulty-dropdown">
+                <div class="dropdown-trigger">Difficulty ▾</div>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item" data-value="easy">Easy</div>
+                    <div class="dropdown-item" data-value="normal">Normal</div>
+                    <div class="dropdown-item" data-value="hard">Hard</div>
+                </div>
+            </div>
+
+            <!-- Time Dropdown -->
+            <div class="dropdown-wrapper" id="time-dropdown">
+                <div class="dropdown-trigger">Time ▾</div>
+                <div class="dropdown-menu">
+                    <div class="dropdown-item" data-value="30">30 min</div>
+                    <div class="dropdown-item" data-value="60">1 hr</div>
+                    <div class="dropdown-item" data-value="90">1.5 hr</div>
+                    <div class="dropdown-item" data-value="120">2 hr</div>
+                    <div class="dropdown-item" data-value="150">2.5 hr</div>
+                    <div class="dropdown-item" data-value="180">3 hr</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="add_button">
+            ADD QUEST
+        </div>
+    </div>
+
+    <script src="../static/js/quest_preview.js"></script>
+</body>
+
+</html>

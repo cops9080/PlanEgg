@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    margin: 0;
+    font-family: 'Arimo', sans-serif;
+}
+
+.background {
+    width: 364px;
+    height: 638px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    border: 0.667px solid #E5E7EB;
+    background: #FFF;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
+
+    /* Added for layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 327px;
+    /* Align with other elements */
+}
+
+.sword_icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    color: #000;
+    font-family: Arimo;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    /* 100% */
+}
+
+.textbox {
+    display: flex;
+    width: 327px;
+    height: 36px;
+    padding: 4px 12px;
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 0.667px solid #D1D5DC;
+    background: #FFF;
+    box-sizing: border-box;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-row {
+    display: flex;
+    justify-content: space-between;
+    width: 327px;
+}
+
+.dropdown-wrapper {
+    position: relative;
+    width: 48%;
+}
+
+.dropdown-trigger {
+    display: flex;
+    height: 36px;
+    padding: 0 12px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    border: 0.667px solid #D1D5DC;
+    background: #FFF;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #FFF;
+    border: 0.667px solid #D1D5DC;
+    border-radius: 8px;
+    margin-top: 4px;
+    display: none;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    display: flex;
+}
+
+.dropdown-item {
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+    background: #f3f4f6;
+}
+
+.add_button {
+    display: flex;
+    width: 327px;
+    /* padding: 7px 130px 9px 105px;  This padding is huge and might break layout if box-sizing isn't border-box or if width is fixed. 
+       Let's adjust it to be centered content for now or keep it but use box-sizing */
+    height: 40px;
+    /* Inferred height from padding + content? Or just let padding define it. */
+    padding: 10px;
+    /* Resetting padding for better centering in preview, or I should respect the user's padding? 
+                       User padding: 7px top, 130px right, 9px bottom, 105px left. 
+                       105 + 130 = 235px horizontal padding. 
+                       327 - 235 = 92px available for content. 
+                       It seems specific. I will try to respect it but add box-sizing. */
+    align-items: center;
+    /* Changed from flex-end to center for text */
+    justify-content: center;
+    /* Center text */
+    gap: 9px;
+    border-radius: 8px;
+    background: #B0E53F;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+}
