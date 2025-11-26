@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/quest-main.css">
+
+    </head>
+
+<body>
+    <div class="main-container">
+        <div class="quest-section">
+            <h2 class="section-title">⚡ 진행 중인 퀘스트</h2>
+            <div class="card-list">
+                {% for quest in quests %}
+                {% if quest['status'] == 1 %}
+                <div class="quest-card" data-id="{{ quest['id'] }}">
+                    <div class="card-content">
+                        <div class="quest-header">
+                            <div class="quest-icon">
+                                <div style="width: 16px; height: 15.04px; background: #7BD224"></div>
+                            </div>
+                            <h3 class="quest-title">{{ quest['quest_name'] }}</h3>
+                        </div>
+                        <div class="quest-details">
+                            <div class="tag difficulty-{{ quest['difficulty']|lower }}">
+                                <span>{{ quest['difficulty'] }}</span>
+                            </div>
+                            <div class="tag time-tag">
+                                <img src="../static/images/jj/16_2969.svg" alt="clock">
+                                <span>{{ quest['time_duration'] }} min</span>
+                            </div>
+                            <div class="exp">
+                                <img src="../static/images/jj/16_3330.svg" alt="exp">
+                                <span>+{{ quest['exp'] }} Exp</span>
+                            </div>
+                            <div class="coin">
+                                <img src="../static/images/jj/16_3332.svg" alt="coin">
+                                <span>{{ quest['coin'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn btn-completed" onclick="completeQuest({{ quest['id'] }})">
+                            <span class="play-icon">􀊄</span>
+                            <span>완료</span>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="quest-section">
+            <h2 class="section-title">📋 진행을 기다리는 퀘스트</h2>
+            <div class="card-list">
+                {% for quest in quests %}
+                {% if quest['status'] == 0 %}
+                <div class="quest-card" data-id="{{ quest['id'] }}">
+                    <div class="card-content">
+                        <div class="quest-header">
+                            <div class="merged-icon-wrapper">
+                                <div style="width: 16px; height: 15.04px; background: #7BD224"></div>
+                                <div
+                                    style="width: 16px; height: 15.04px; background: #3E9814; position: absolute; top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);">
+                                </div>
+                            </div>
+                            <h3 class="quest-title">{{ quest['quest_name'] }}</h3>
+                        </div>
+                        <div class="quest-details">
+                            <div class="tag difficulty-{{ quest['difficulty']|lower }}">
+                                <span>{{ quest['difficulty'] }}</span>
+                            </div>
+                            <div class="tag time-tag">
+                                <img src="../static/images/jj/16_2969.svg" alt="clock">
+                                <span>{{ quest['time_duration'] }} min</span>
+                            </div>
+                            <div class="exp">
+                                <img src="../static/images/jj/16_3330.svg" alt="exp">
+                                <span>+{{ quest['exp'] }} Exp</span>
+                            </div>
+                            <div class="coin">
+                                <img src="../static/images/jj/16_3332.svg" alt="coin">
+                                <span>{{ quest['coin'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn btn-proceed" onclick="startQuest({{ quest['id'] }})">
+                            <span class="play-icon">􀊄</span>
+                            <span>진행하기</span>
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="footer-nav">
+            <a href="#" class="back-button">
+                <img src="../static/images/jj/16_3337.svg" alt="back">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function startQuest(questId) {
+            fetch('/update_status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: questId,
+                    status: 1
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        location.reload(); // Reload to reflect changes
+                    } else {
+                        alert('Error updating status');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function completeQuest(questId) {
+            fetch('/delete_quest', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: questId
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        location.reload();
+                    } else {
+                        alert('Error deleting quest');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
