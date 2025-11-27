@@ -4,10 +4,12 @@ import os
 
 app = Flask(__name__)
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'database.db')
+
 def init_db():
-    db_path = os.path.abspath('database.db')
-    print(f"Using database at: {db_path}")
-    conn = sqlite3.connect('database.db')
+    print(f"Using database at: {DB_PATH}")
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('''
         CREATE TABLE IF NOT EXISTS quests (
@@ -42,7 +44,7 @@ def login():
 
 @app.route('/')
 def main():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
     
@@ -68,7 +70,7 @@ def quest():
 
 @app.route('/questlist')
 def questlist():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
     c.execute('SELECT * FROM quests')
@@ -110,7 +112,9 @@ def add_quest():
     coin = reward['coin']
     exp = reward['exp']
 
-    conn = sqlite3.connect('database.db')
+    exp = reward['exp']
+
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('INSERT INTO quests (quest_name, difficulty, time_duration, coin, exp, status) VALUES (?, ?, ?, ?, ?, 0)',
               (quest_name, difficulty, time_duration, coin, exp))
@@ -128,7 +132,7 @@ def update_status():
     if quest_id is None or new_status is None:
         return jsonify({'error': 'Missing data'}), 400
 
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('UPDATE quests SET status = ? WHERE id = ?', (new_status, quest_id))
     conn.commit()
@@ -144,7 +148,7 @@ def delete_quest():
     if quest_id is None:
         return jsonify({'error': 'Missing data'}), 400
 
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     
     # 1. Get quest rewards
