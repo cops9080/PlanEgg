@@ -38,8 +38,26 @@ def login():
     return render_template("login.html")
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def main():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    
+    # Fetch user stats
+    c.execute('SELECT * FROM user_stats WHERE id = 1')
+    user = c.fetchone()
+    
+    # Fetch active quests (status = 1)
+    c.execute('SELECT * FROM quests WHERE status = 1')
+    active_quests = c.fetchall()
+    
+    conn.close()
+    
+    if not user:
+        # Fallback if no user exists (though init_db creates one)
+        user = {'lvl': 1, 'exp': 0, 'coin': 0}
+        
+    return render_template("main.html", user=user, active_quests=active_quests)
 
 @app.route('/quest')
 def quest():

@@ -1,1 +1,503 @@
+:root {
+    /* Color Palette */
+    --primary-color: #84CC16;
+    /* Lime 500 */
+    --primary-dark: #65A30D;
+    /* Lime 600 */
+    --primary-light: #BEF264;
+    /* Lime 200 */
+    --secondary-color: #10B981;
+    /* Emerald 500 */
 
+    --bg-color: #F3F4F6;
+    /* Gray 100 */
+    --card-bg: #FFFFFF;
+    --text-main: #111827;
+    /* Gray 900 */
+    --text-secondary: #6B7280;
+    /* Gray 500 */
+    --text-light: #9CA3AF;
+    /* Gray 400 */
+
+    --danger-color: #EF4444;
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+
+    /* Spacing & Layout */
+    --header-height: 60px;
+    --nav-height: 80px;
+    --border-radius-lg: 24px;
+    --border-radius-md: 16px;
+    --border-radius-sm: 12px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 20px rgba(132, 204, 22, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.app-container {
+    max-width: 480px;
+    /* Mobile-first constraint */
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    padding-bottom: calc(var(--nav-height) + 20px);
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.app-header {
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(243, 244, 246, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 1.25rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+    border-radius: 50%;
+}
+
+.icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.icon-btn:active {
+    transform: scale(0.95);
+}
+
+.notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--danger-color);
+    border-radius: 50%;
+    border: 2px solid var(--bg-color);
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Pet Card */
+.pet-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.pet-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.level-badge {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-glow);
+    display: flex;
+    gap: 4px;
+}
+
+.pet-settings-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.pet-display {
+    margin-bottom: 24px;
+}
+
+.pet-image-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 16px;
+}
+
+.pet-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.pet-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background: var(--primary-color);
+    filter: blur(40px);
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.pet-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.exp-container {
+    width: 100%;
+}
+
+.exp-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.exp-label i {
+    color: var(--warning-color);
+    margin-right: 4px;
+}
+
+.exp-bar-wrapper {
+    height: 12px;
+    background-color: #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.exp-bar {
+    width: 100%;
+    height: 100%;
+}
+
+.exp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 10px;
+    transition: width 0.5s ease-out;
+}
+
+.exp-message {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* Quests Section */
+.quests-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.view-all {
+    font-size: 0.9rem;
+    color: var(--primary-dark);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.quest-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-md);
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.quest-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.quest-status-indicator {
+    width: 4px;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.quest-content {
+    flex: 1;
+    padding-left: 12px;
+}
+
+.quest-header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.quest-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.type-exercise {
+    background-color: rgba(132, 204, 22, 0.1);
+    color: var(--primary-dark);
+}
+
+.type-study {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: #3B82F6;
+}
+
+.quest-main-info {
+    flex: 1;
+}
+
+.quest-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+.quest-tags {
+    display: flex;
+    gap: 8px;
+}
+
+.tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.tag-difficulty {
+    background-color: #F3F4F6;
+    color: var(--text-secondary);
+}
+
+.tag-time {
+    background-color: #FEF3C7;
+    color: #D97706;
+}
+
+.quest-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #F3F4F6;
+}
+
+.quest-rewards {
+    display: flex;
+    gap: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.reward-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.reward-item.exp {
+    color: var(--primary-dark);
+}
+
+.reward-item.coin {
+    color: var(--warning-color);
+}
+
+.btn-complete {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-complete:hover {
+    background-color: var(--primary-dark);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: var(--nav-height);
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    padding-bottom: 15px;
+    /* Safe area for mobile */
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.75rem;
+    gap: 4px;
+    transition: color 0.2s;
+    width: 60px;
+}
+
+.nav-item.active {
+    color: var(--primary-dark);
+}
+
+.nav-icon-wrapper {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.nav-item-fab-wrapper {
+    position: relative;
+    top: -24px;
+}
+
+.fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: 4px solid white;
+    box-shadow: 0 4px 10px rgba(132, 204, 22, 0.4);
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.fab-btn:active {
+    transform: scale(0.95);
+}

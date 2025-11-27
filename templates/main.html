@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인화면</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <span class="logo-text">MyPet</span>
+            </div>
+            <div class="header-right">
+                <button class="icon-btn notification-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <button class="icon-btn menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Pet Section -->
+            <section class="pet-card">
+                <div class="pet-header">
+                    <div class="level-badge">
+                        <span class="level-label">Lv</span>
+                        <span class="level-value">{{ user['lvl'] }}</span>
+                    </div>
+                    <button class="pet-settings-btn"><i class="fa-solid fa-ellipsis"></i></button>
+                </div>
+
+                <div class="pet-display">
+                    <div class="pet-image-wrapper">
+                        <img src="../static/images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png" alt="My Pet" class="pet-image">
+                        <div class="pet-glow"></div>
+                    </div>
+                    <h2 class="pet-name">포포</h2>
+                </div>
+
+                <div class="exp-container">
+                    <div class="exp-info">
+                        <div class="exp-label">
+                            <i class="fa-solid fa-bolt"></i> 경험치
+                        </div>
+                        <div class="exp-value">{{ user['exp'] }} / 100</div>
+                    </div>
+                    <div class="exp-bar-wrapper">
+                        <div class="exp-bar">
+                            <div class="exp-fill" style="width: {{ user['exp'] }}%"></div>
+                        </div>
+                    </div>
+                    <p class="exp-message">퀘스트를 완수하여 펫을 성장시키세요!</p>
+                </div>
+            </section>
+
+            <!-- Ongoing Quests -->
+            <section class="quests-section">
+                <div class="section-header">
+                    <h3 class="section-title">진행 중인 퀘스트</h3>
+                    <a href="{{ url_for('questlist') }}" class="view-all">전체보기</a>
+                </div>
+
+                <div class="quest-list">
+                    {% for quest in active_quests %}
+                    <div class="quest-card">
+                        <div class="quest-status-indicator"></div>
+                        <div class="quest-content">
+                            <div class="quest-header">
+                                <div class="quest-icon-wrapper type-exercise">
+                                    <i class="fa-solid fa-scroll"></i>
+                                </div>
+                                <div class="quest-main-info">
+                                    <h4 class="quest-title">{{ quest['quest_name'] }}</h4>
+                                    <div class="quest-tags">
+                                        <span class="tag tag-difficulty">{{ quest['difficulty'] }}</span>
+                                        <span class="tag tag-time"><i class="fa-regular fa-clock"></i> {{
+                                            quest['time_duration'] }}m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="quest-footer">
+                                <div class="quest-rewards">
+                                    <span class="reward-item exp"><i class="fa-solid fa-bolt"></i> +{{ quest['exp'] }}
+                                        Exp</span>
+                                    <span class="reward-item coin"><i class="fa-solid fa-coins"></i> {{ quest['coin']
+                                        }}</span>
+                                </div>
+                                <button class="btn-complete" onclick="completeQuest({{ quest['id'] }})">
+                                    <i class="fa-solid fa-check"></i> 완료
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
+                        <p>진행 중인 퀘스트가 없습니다.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item active">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <span>홈</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <span>TO-DO</span>
+            </a>
+            <div class="nav-item-fab-wrapper">
+                <a href="{{ url_for('quest') }}" class="fab-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <a href="#" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <span>친구</span>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <span>설정</span>
+            </a>
+        </nav>
+    </div>
+    <script>
+        function completeQuest(questId) {
+            fetch('/delete_quest', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: questId
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                        location.reload();
+                    } else {
+                        alert('Error completing quest');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
