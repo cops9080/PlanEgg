@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 import sqlite3
+import os
 
 app = Flask(__name__)
 
 def init_db():
+    db_path = os.path.abspath('database.db')
+    print(f"Using database at: {db_path}")
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     c.execute('''
