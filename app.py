@@ -62,7 +62,7 @@ def main():
         # Fallback if no user exists (though init_db creates one)
         user = {'lvl': 1, 'exp': 0, 'coin': 0}
         
-    return render_template("main.html", user=user, active_quests=active_quests)
+    return render_template("login.html")
 
 @app.route('/quest')
 def quest():
