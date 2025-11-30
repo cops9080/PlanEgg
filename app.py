@@ -40,26 +40,29 @@ def init_db():
 
 @app.route('/')
 def main():
+    return render_template("login.html")
+
+@app.route('/home')
+def home():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
     
-    # Fetch user stats
+    # User 정보 가져오기
     c.execute('SELECT * FROM user_stats WHERE id = 1')
     user = c.fetchone()
     
-    # Fetch active quests (status = 1)
+    # 활성화된 퀘스트 가져오기
     c.execute('SELECT * FROM quests WHERE status = 1')
     active_quests = c.fetchall()
     
     conn.close()
     
     if not user:
-        # Fallback if no user exists (though init_db creates one)
         user = {'lvl': 1, 'exp': 0, 'coin': 0}
         
-    return render_template("login.html")
-
+    # 데이터를 가지고 main.html을 렌더링
+    return render_template("main.html", user=user, active_quests=active_quests)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
