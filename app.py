@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import sqlite3
 import os
 
@@ -38,10 +38,6 @@ def init_db():
     conn.commit()
     conn.close()
 
-@app.route('/login')
-def login():
-    return render_template("login.html")
-
 @app.route('/')
 def main():
     conn = sqlite3.connect(DB_PATH)
@@ -63,6 +59,19 @@ def main():
         user = {'lvl': 1, 'exp': 0, 'coin': 0}
         
     return render_template("login.html")
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # 여기에 아이디/비밀번호 확인하는 코드를 추가할 예정 
+        return redirect(url_for('streak'))
+
+    return render_template("login.html")
+
+@app.route('/streak')
+def streak():
+    return render_template("streak.html")
 
 @app.route('/quest')
 def quest():
