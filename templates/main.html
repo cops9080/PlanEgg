@@ -83,7 +83,8 @@
                                 <div class="quest-main-info">
                                     <h4 class="quest-title">{{ quest['quest_name'] }}</h4>
                                     <div class="quest-tags">
-                                        <span class="tag tag-difficulty">{{ quest['difficulty'] }}</span>
+                                        <span class="tag tag-difficulty difficulty-{{ quest['difficulty']|lower }}">{{
+                                            quest['difficulty'] }}</span>
                                         <span class="tag tag-time"><i class="fa-regular fa-clock"></i> {{
                                             quest['time_duration'] }}m</span>
                                     </div>
@@ -108,7 +109,7 @@
                         <i class="fa-solid fa-clipboard-list"
                             style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
                         <p>현재 진행 중인 퀘스트가 없습니다.</p>
-                        <p style="font-size: 14px; margin-top: 8px;">새로운 퀘스트를 시작해보세요!</p>
+                        <p style="font-size: 14px; margin-top: 8px;">TO-DO 탭에서 퀘스트를 시작해보세요!</p>
                     </div>
                     {% endfor %}
                 </div>
