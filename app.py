@@ -64,6 +64,7 @@ def home():
     # 데이터를 가지고 main.html을 렌더링
     return render_template("main.html", user=user, active_quests=active_quests)
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':

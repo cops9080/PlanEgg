@@ -41,7 +41,8 @@
 
                 <div class="pet-display">
                     <div class="pet-image-wrapper">
-                        <img src="../static/images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png" alt="My Pet" class="pet-image">
+                        <img src="../static/images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png"
+                            alt="My Pet" class="pet-image">
                         <div class="pet-glow"></div>
                     </div>
                     <h2 class="pet-name">포포</h2>
@@ -103,8 +104,11 @@
                         </div>
                     </div>
                     {% else %}
-                    <div style="text-align: center; padding: 20px; color: var(--text-secondary);">
-                        <p>진행 중인 퀘스트가 없습니다.</p>
+                    <div style="text-align: center; padding: 40px 20px; color: #888;">
+                        <i class="fa-solid fa-clipboard-list"
+                            style="font-size: 48px; margin-bottom: 16px; opacity: 0.5;"></i>
+                        <p>현재 진행 중인 퀘스트가 없습니다.</p>
+                        <p style="font-size: 14px; margin-top: 8px;">새로운 퀘스트를 시작해보세요!</p>
                     </div>
                     {% endfor %}
                 </div>
@@ -119,12 +123,14 @@
                 </div>
                 <span>홈</span>
             </a>
-            <a href="#" class="nav-item">
+
+            <a href="{{ url_for('questlist') }}" class="nav-item">
                 <div class="nav-icon-wrapper">
                     <i class="fa-solid fa-list-check"></i>
                 </div>
                 <span>TO-DO</span>
             </a>
+
             <div class="nav-item-fab-wrapper">
                 <a href="{{ url_for('quest') }}" class="fab-btn">
                     <i class="fa-solid fa-plus"></i>
