@@ -297,7 +297,25 @@ def delete_quest():
 
     conn.close()
 
+
+
     return jsonify({'message': msg}), 200
+
+@app.route('/reset_db', methods=['POST'])
+def reset_db():
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    
+    # Reset user stats
+    c.execute('UPDATE user_stats SET lvl = 1, exp = 0, coin = 0 WHERE id = 1')
+    
+    # Delete all quests
+    c.execute('DELETE FROM quests')
+    
+    conn.commit()
+    conn.close()
+    
+    return jsonify({'message': '데이터가 초기화되었습니다.'}), 200
 
 if __name__ == '__main__':
     init_db()

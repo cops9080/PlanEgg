@@ -143,7 +143,7 @@
                 </div>
                 <span>친구</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" id="settings-btn">
                 <div class="nav-icon-wrapper">
                     <i class="fa-solid fa-gear"></i>
                 </div>
@@ -151,6 +151,15 @@
             </a>
         </nav>
     </div>
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-title">설정</div>
+            <button class="modal-btn btn-reset" onclick="resetData()">데이터 초기화</button>
+            <button class="modal-btn btn-close" onclick="closeSettings()">닫기</button>
+        </div>
+    </div>
+
     <script>
         function completeQuest(questId) {
             fetch('/delete_quest', {
@@ -174,6 +183,41 @@
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+        }
+
+        // Settings Modal Logic
+        const settingsBtn = document.getElementById('settings-btn');
+        const modal = document.getElementById('settingsModal');
+
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.style.display = 'flex';
+            });
+        }
+
+        function closeSettings() {
+            modal.style.display = 'none';
+        }
+
+        function resetData() {
+            if (confirm('정말로 모든 데이터를 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
+                fetch('/reset_db', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        location.reload();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('오류가 발생했습니다.');
+                    });
+            }
         }
     </script>
 </body>

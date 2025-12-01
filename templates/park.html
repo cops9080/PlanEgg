@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <a class="park-container">
+    <div class="park-container">
 
         <a href="{{ url_for('home') }}" class="top-btn back-btn">
             <div class="icon-circle">
@@ -91,7 +91,58 @@
             </div>
         </div>
 
+    </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-title">설정</div>
+            <button class="modal-btn btn-reset" onclick="resetData()">데이터 초기화</button>
+            <button class="modal-btn btn-close" onclick="closeSettings()">닫기</button>
         </div>
+    </div>
+
+    <script>
+        const settingsBtn = document.querySelector('.nav-settings');
+        const modal = document.getElementById('settingsModal');
+
+        console.log('Settings Button:', settingsBtn);
+        console.log('Modal:', modal);
+
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => {
+                console.log('Settings button clicked');
+                modal.style.display = 'flex';
+            });
+        } else {
+            console.error('Settings button not found');
+        }
+
+        function closeSettings() {
+            modal.style.display = 'none';
+        }
+
+        function resetData() {
+            if (confirm('정말로 모든 데이터를 초기화하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
+                fetch('/reset_db', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                        location.reload(); // Reload to reflect changes
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('오류가 발생했습니다.');
+                    });
+            }
+        }
+    </script>
 </body>
 
 </html>
