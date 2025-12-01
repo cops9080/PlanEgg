@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>아이템 상점</title>
-    <link rel="stylesheet" href="../static/css/market.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/market.css') }}">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <!-- Refresh Timer -->
         <div class="refresh-timer">
             <div class="timer-text">일일 상점 새로 고침까지 2일 23시</div>
-            <img class="timer-icon" src="../static/images/market/Vector.svg" />
+            <img class="timer-icon" src="{{ url_for('static', filename='images/market/Vector.svg') }}" />
         </div>
 
         <!-- Item Card 1 -->
@@ -41,11 +41,13 @@
             <div class="item-name">동그란 악세서리</div>
             <div class="item-price price-1">5</div>
             <div class="coin-icon-wrapper coin-1">
-                <img class="coin-img" src="../static/images/market/toll_16dp_6A7282_FILL0_wght400_GRAD0_opsz20 1.svg">
+                <img class="coin-img"
+                    src="{{ url_for('static', filename='images/market/toll_16dp_6A7282_FILL0_wght400_GRAD0_opsz20 1.svg') }}">
             </div>
         </div>
         <div class="item-image-box img-box-1">
-            <img class="product-img prod-img-1" src="../static/images/market/image-removebg-preview (9) 1.png" />
+            <img class="product-img prod-img-1"
+                src="{{ url_for('static', filename='images/market/image-removebg-preview (9) 1.png') }}" />
         </div>
 
         <!-- Item Card 2 -->
@@ -57,11 +59,13 @@
             <div class="item-name">체리 악세서리</div>
             <div class="item-price price-2">10</div>
             <div class="coin-icon-wrapper coin-2">
-                <img class="coin-img" src="../static/images/market/toll_16dp_6A7282_FILL0_wght400_GRAD0_opsz20 1.svg">
+                <img class="coin-img"
+                    src="{{ url_for('static', filename='images/market/toll_16dp_6A7282_FILL0_wght400_GRAD0_opsz20 1.svg') }}">
             </div>
         </div>
         <div class="item-image-box img-box-2">
-            <img class="product-img prod-img-2" src="../static/images/market/image-removebg-preview (10) 1.png" />
+            <img class="product-img prod-img-2"
+                src="{{ url_for('static', filename='images/market/image-removebg-preview (10) 1.png') }}" />
         </div>
 
         <!-- Item Card 3 (Placeholder) -->
@@ -88,10 +92,10 @@
 
         <!-- Header -->
         <div class="page-title">아이템 상점</div>
-        <div class="back-btn">
+        <a href="{{ url_for('park') }}" class="back-btn">
             <div class="back-btn-bg"></div>
             <div class="back-icon"></div>
-        </div>
+        </a>
     </div>
 </body>
 

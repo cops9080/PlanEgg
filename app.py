@@ -131,7 +131,7 @@ def user(name):
             'quest': '휴식 중',
             'quest_time': '-',
             'quest_exp': 0,
-            'quest_difficulty': 'Easy'
+            'quest_difficulty': '-'
         }
     }
     

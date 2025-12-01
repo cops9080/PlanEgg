@@ -39,7 +39,10 @@
             src="{{ url_for('static', filename='images/park/image-removebg-preview (8) 1.png') }}" />
         <img class="deco-tree-right"
             src="{{ url_for('static', filename='images/park/image-removebg-preview (8) 2.png') }}" />
-        <img class="deco-shop" src="{{ url_for('static', filename='images/park/ㄹㅇ상점 1.png') }}" />
+        <a href="{{ url_for('market') }}" class="deco-shop">
+            <img src="{{ url_for('static', filename='images/park/ㄹㅇ상점 1.png') }}"
+                style="width: 100%; display: block;" />
+        </a>
 
 
         <a href="{{ url_for('user', name='멍이') }}" class="char-group char-dog">
@@ -88,7 +91,7 @@
             </div>
         </div>
 
-    </div>
+        </div>
 </body>
 
 </html>
