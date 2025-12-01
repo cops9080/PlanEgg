@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 import sqlite3
 import os
 
@@ -38,31 +38,44 @@ def init_db():
     conn.commit()
     conn.close()
 
-@app.route('/login')
-def login():
-    return render_template("login.html")
-
 @app.route('/')
 def main():
+    return render_template("login.html")
+
+@app.route('/home')
+def home():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
     
-    # Fetch user stats
+    # User 정보 가져오기
     c.execute('SELECT * FROM user_stats WHERE id = 1')
     user = c.fetchone()
     
-    # Fetch active quests (status = 1)
+    # 활성화된 퀘스트 가져오기
     c.execute('SELECT * FROM quests WHERE status = 1')
     active_quests = c.fetchall()
     
     conn.close()
     
     if not user:
-        # Fallback if no user exists (though init_db creates one)
         user = {'lvl': 1, 'exp': 0, 'coin': 0}
         
+    # 데이터를 가지고 main.html을 렌더링
     return render_template("main.html", user=user, active_quests=active_quests)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # 여기에 아이디/비밀번호 확인하는 코드를 추가할 예정 
+        return redirect(url_for('streak'))
+
+    return render_template("login.html")
+
+@app.route('/streak')
+def streak():
+    return render_template("streak.html")
 
 @app.route('/quest')
 def quest():

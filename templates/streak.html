@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연속출석</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/streak.css') }}">
+</head>
+
+<body>
+    <div class="streak-container">
+        <!-- To-Do Button -->
+        <div class="nav-btn-wrapper todo" data-tinted="False">
+            <div class="nav-btn-bg-container size-95" data-mode="Light" data-state="Default">
+                <div class="nav-btn-shadow-layer-1 size-95">
+                    <div class="nav-btn-shadow-layer-2 size-95">
+                        <div class="nav-btn-inner-black size-95"></div>
+                    </div>
+                    <div class="nav-btn-blur-layer size-95"></div>
+                </div>
+                <div class="nav-btn-gradient-layer size-95"></div>
+                <div class="nav-btn-transparent-layer size-95"></div>
+            </div>
+            <div class="nav-text-wrapper" data-mode="Light" data-state="Default">
+                <div class="nav-text primary">TO-DO</div>
+            </div>
+        </div>
+
+        <!-- Friends Button -->
+        <div class="nav-btn-wrapper friends" data-tinted="False">
+            <div class="nav-btn-bg-container size-109" data-mode="Light" data-state="Default">
+                <div class="nav-btn-shadow-layer-1 size-109">
+                    <div class="nav-btn-shadow-layer-2 size-109">
+                        <div class="nav-btn-inner-black size-109"></div>
+                    </div>
+                    <div class="nav-btn-blur-layer size-109"></div>
+                </div>
+                <div class="nav-btn-gradient-layer size-109"></div>
+                <div class="nav-btn-transparent-layer size-109"></div>
+            </div>
+            <div class="nav-text-wrapper" data-mode="Light" data-state="Default">
+                <div class="nav-text secondary">FRIENDS</div>
+            </div>
+        </div>
+
+        <!-- Icon Button -->
+        <div class="nav-btn-wrapper icon-only" data-tinted="False">
+            <div class="nav-btn-bg-container size-56" data-mode="Light" data-state="Default">
+                <div class="nav-btn-shadow-layer-1 size-56">
+                    <div class="nav-btn-shadow-layer-2 size-56">
+                        <div class="nav-btn-inner-black size-56"></div>
+                    </div>
+                    <div class="nav-btn-blur-layer size-56"></div>
+                </div>
+                <div class="nav-btn-gradient-layer size-56"></div>
+                <div class="nav-btn-transparent-layer size-56"></div>
+            </div>
+            <div style="text-align: center; justify-content: center; display: flex; flex-direction: column"></div>
+        </div>
+
+        <!-- Small Square Icon -->
+        <div class="small-square-icon-wrapper">
+            <div class="small-square-icon"></div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="profile-card card-base">
+            <div class="level-header">
+                <div class="level-spacer">
+                    <div class="level-spacer-inner"></div>
+                </div>
+                <div class="level-badge">
+                    <div class="level-text">Lv 1</div>
+                </div>
+            </div>
+            <div class="profile-content">
+                <div class="profile-name-section">
+                    <div class="profile-name-spacer"></div>
+                    <div class="profile-name">포포</div>
+                </div>
+                <div class="exp-section">
+                    <div class="exp-header">
+                        <div class="exp-label-container">
+                            <div class="exp-icon">
+                                <div class="exp-icon-part-1"></div>
+                                <div class="exp-icon-part-2"></div>
+                            </div>
+                            <div class="exp-label-text-wrapper">
+                                <div class="exp-label-text">경험치</div>
+                            </div>
+                        </div>
+                        <div class="exp-value-wrapper">
+                            <div class="exp-value-text">0 / 100</div>
+                        </div>
+                    </div>
+                    <div class="exp-bar-container">
+                        <div class="exp-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="profile-footer">
+                    <div class="profile-footer-text">퀘스트를 완수하여 펫을 키우세요!</div>
+                </div>
+            </div>
+            <img class="profile-image" src="{{ url_for('static', filename='images/streak/ghost1.png') }}" />
+        </div>
+
+        <!-- Profile Shadow & Notification -->
+        <div class="profile-shadow"></div>
+        <div class="notification-count">0</div>
+        <div class="notification-icon-wrapper">
+            <div class="notification-icon"></div>
+        </div>
+
+        <!DOCTYPE html>
+        <html lang="ko">
+
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>연속출석</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/streak.css') }}">
+        </head>
+
+        <body>
+            <div class="streak-container">
+                <!-- To-Do Button -->
+                <div class="nav-btn-wrapper todo" data-tinted="False">
+                    <div class="nav-btn-bg-container size-95" data-mode="Light" data-state="Default">
+                        <div class="nav-btn-shadow-layer-1 size-95">
+                            <div class="nav-btn-shadow-layer-2 size-95">
+                                <div class="nav-btn-inner-black size-95"></div>
+                            </div>
+                            <div class="nav-btn-blur-layer size-95"></div>
+                        </div>
+                        <div class="nav-btn-gradient-layer size-95"></div>
+                        <div class="nav-btn-transparent-layer size-95"></div>
+                    </div>
+                    <div class="nav-text-wrapper" data-mode="Light" data-state="Default">
+                        <div class="nav-text primary">TO-DO</div>
+                    </div>
+                </div>
+
+                <!-- Friends Button -->
+                <div class="nav-btn-wrapper friends" data-tinted="False">
+                    <div class="nav-btn-bg-container size-109" data-mode="Light" data-state="Default">
+                        <div class="nav-btn-shadow-layer-1 size-109">
+                            <div class="nav-btn-shadow-layer-2 size-109">
+                                <div class="nav-btn-inner-black size-109"></div>
+                            </div>
+                            <div class="nav-btn-blur-layer size-109"></div>
+                        </div>
+                        <div class="nav-btn-gradient-layer size-109"></div>
+                        <div class="nav-btn-transparent-layer size-109"></div>
+                    </div>
+                    <div class="nav-text-wrapper" data-mode="Light" data-state="Default">
+                        <div class="nav-text secondary">FRIENDS</div>
+                    </div>
+                </div>
+
+                <!-- Icon Button -->
+                <div class="nav-btn-wrapper icon-only" data-tinted="False">
+                    <div class="nav-btn-bg-container size-56" data-mode="Light" data-state="Default">
+                        <div class="nav-btn-shadow-layer-1 size-56">
+                            <div class="nav-btn-shadow-layer-2 size-56">
+                                <div class="nav-btn-inner-black size-56"></div>
+                            </div>
+                            <div class="nav-btn-blur-layer size-56"></div>
+                        </div>
+                        <div class="nav-btn-gradient-layer size-56"></div>
+                        <div class="nav-btn-transparent-layer size-56"></div>
+                    </div>
+                    <div style="text-align: center; justify-content: center; display: flex; flex-direction: column">
+                    </div>
+                </div>
+
+                <!-- Small Square Icon -->
+                <div class="small-square-icon-wrapper">
+                    <div class="small-square-icon"></div>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="profile-card card-base">
+                    <div class="level-header">
+                        <div class="level-spacer">
+                            <div class="level-spacer-inner"></div>
+                        </div>
+                        <div class="level-badge">
+                            <div class="level-text">Lv 1</div>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="profile-name-section">
+                            <div class="profile-name-spacer"></div>
+                            <div class="profile-name">포포</div>
+                        </div>
+                        <div class="exp-section">
+                            <div class="exp-header">
+                                <div class="exp-label-container">
+                                    <div class="exp-icon">
+                                        <div class="exp-icon-part-1"></div>
+                                        <div class="exp-icon-part-2"></div>
+                                    </div>
+                                    <div class="exp-label-text-wrapper">
+                                        <div class="exp-label-text">경험치</div>
+                                    </div>
+                                </div>
+                                <div class="exp-value-wrapper">
+                                    <div class="exp-value-text">0 / 100</div>
+                                </div>
+                            </div>
+                            <div class="exp-bar-container">
+                                <div class="exp-bar-fill"></div>
+                            </div>
+                        </div>
+                        <div class="profile-footer">
+                            <div class="profile-footer-text">퀘스트를 완수하여 펫을 키우세요!</div>
+                        </div>
+                    </div>
+                    <img class="profile-image" src="{{ url_for('static', filename='images/streak/ghost1.png') }}" />
+                </div>
+
+                <!-- Profile Shadow & Notification -->
+                <div class="profile-shadow"></div>
+                <div class="notification-count">0</div>
+                <div class="notification-icon-wrapper">
+                    <div class="notification-icon"></div>
+                </div>
+
+                <!-- Quest Card -->
+                <div class="quest-card card-base">
+                    <div class="quest-title">진행 중인 퀘스트</div>
+                    <div class="quest-item-container">
+                        <div class="quest-item-bg-1"></div>
+                        <div class="quest-item-bg-2">
+                            <div class="quest-icon-wrapper"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <img src="{{ url_for('static', filename='images/streak/sparkel.svg') }}"
+                                    style="background: none; position: static;">
+                            </div>
+                            <div class="quest-name">운동하기</div>
+                            <div class="quest-difficulty-badge">
+                                <div class="quest-difficulty-bg"></div>
+                                <div class="quest-difficulty-text">보통</div>
+                            </div>
+                            <div class="quest-reward-text">+15 Exp</div>
+                            <div class="quest-count-text">10</div>
+                            <div class="quest-count-icon-wrapper">
+                                <div class="quest-count-icon"></div>
+                            </div>
+                            <div class="quest-time-badge">
+                                <div class="quest-time-bg"></div>
+                                <div class="quest-time-text">1:05</div>
+                                <div class="quest-time-icon-wrapper"
+                                    style="display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{ url_for('static', filename='images/streak/time.svg') }}"
+                                        style="background: none; position: static;">
+                                </div>
+                            </div>
+                            <div class="quest-complete-btn-wrapper">
+                                <div class="quest-complete-btn" data-destructive="False" data-enabled="True"
+                                    data-label-type="Symbol + Text" data-size="Small" data-style="Bordered - Prominent">
+                                    <div class="quest-complete-text">완료</div>
+                                </div>
+                                <div class="quest-complete-icon-wrapper"
+                                    style="display: flex; justify-content: center; align-items: center;">
+                                    <img src="{{ url_for('static', filename='images/streak/check.svg') }}"
+                                        style="background: none; position: static;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quest-header-icon-wrapper">
+                        <div class="quest-header-icon-part p1"></div>
+                        <div class="quest-header-icon-part p2"></div>
+                        <div class="quest-header-icon-part p3"></div>
+                        <div class="quest-header-icon-part p4"></div>
+                    </div>
+                </div>
+
+                <!-- Overlay -->
+                <div class="overlay"></div>
+
+                <!-- Streak Modal -->
+                <div class="streak-modal">
+                    <div class="streak-text-1">벌써 7일 연속 출석중!</div>
+                    <div class="streak-text-2">100 coin이 적립되었어요!</div>
+                    <div class="streak-image-shadow"></div>
+                    <img class="streak-image" src="{{ url_for('static', filename='images/streak/ghost1.png') }}" />
+                    <div class="streak-icon-wrapper"
+                        style="display: flex; justify-content: center; align-items: center;">
+                        <img src="{{ url_for('static', filename='images/streak/close.svg') }}"
+                            style="background: none; position: static;">
+                        <a href="{{ url_for('home') }}" class="streak-icon-wrapper"
+                            style="display: flex; justify-content: center; align-items: center; cursor: pointer;">
+
+                    </div>
+                </div>
+            </div>
+        </body>
+
+        </html>

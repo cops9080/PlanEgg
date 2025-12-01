@@ -1,98 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <title>광장</title>
-    <link rel="stylesheet" href="../static/css/park.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/park.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <div class="park-container">
-        <!-- Navigation Buttons -->
-        <div class="nav-button nav-todo">
-            <div class="nav-button-bg"></div>
-            <div class="nav-text">TO-DO</div>
-        </div>
 
-        <div class="nav-button nav-friends">
-            <div class="nav-button-bg"></div>
-            <div class="nav-text">FRIENDS</div>
-        </div>
+        <a href="{{ url_for('home') }}" class="top-btn back-btn">
+            <div class="icon-circle">
+                <i class="fa-solid fa-arrow-left"></i>
+            </div>
+        </a>
 
-        <div class="nav-button nav-menu">
-            <div class="nav-button-bg"></div>
-            <div class="menu-icon"></div>
-        </div>
-
-        <!-- Characters and Status -->
-        <img class="char-1-img" src="https://placehold.co/104x104" />
-        <div class="character-status char-1-status">독서중</div>
-        <div class="speech-bubble char-1-bubble">
-            <div class="speech-text">아무 생각이 없어요</div>
-        </div>
-        <div class="name-tag char-1-name">
-            <div class="name-tag-bg">
-                <div class="name-text">포포</div>
+        <div class="top-right-group">
+            <div class="top-btn stats-btn">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-chart-simple"></i>
+                </div>
+            </div>
+            <div class="top-btn share-btn">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+            </div>
+            <div class="top-btn add-friend-btn">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
             </div>
         </div>
 
-        <div class="character-status char-2-status">독서중</div>
-        <div class="speech-bubble char-2-bubble">
-            <div class="speech-text">chill한 기분이에요</div>
+        <img class="deco-tree-left"
+            src="{{ url_for('static', filename='images/park/image-removebg-preview (8) 1.png') }}" />
+        <img class="deco-tree-right"
+            src="{{ url_for('static', filename='images/park/image-removebg-preview (8) 2.png') }}" />
+        <img class="deco-shop" src="{{ url_for('static', filename='images/park/ㄹㅇ상점 1.png') }}" />
+
+
+        <div class="char-group char-dog">
+            <div class="speech-bubble">
+                <span class="emoji">📝</span> 공부 중이에요!
+            </div>
+            <img class="char-img"
+                src="{{ url_for('static', filename='images/park/dreamina-2025-11-08-8642-Using image 1 as a reference, change the...-Photoroom 1.png') }}"
+                alt="멍이">
+            <div class="name-tag">멍이</div>
+            <div class="shadow"></div>
         </div>
-        <div class="name-tag char-2-name">
-            <div class="name-tag-bg">
-                <div class="name-text">냥이</div>
+
+        <div class="char-group char-cat">
+            <div class="speech-bubble">
+                chill한 기분이에요
+            </div>
+            <img class="char-img" src="{{ url_for('static', filename='images/park/image 1.png') }}" alt="냥이">
+            <div class="name-tag">냥이</div>
+            <div class="shadow"></div>
+        </div>
+
+        <div class="char-group char-ghost">
+            <div class="speech-bubble">
+                아무 생각이 없어요
+            </div>
+            <img class="char-img"
+                src="{{ url_for('static', filename='images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png') }}"
+                alt="포포">
+            <div class="name-tag">포포</div>
+            <div class="shadow"></div>
+        </div>
+
+
+        <div class="nav-btn nav-friends">
+            <div class="nav-content">FRIENDS</div>
+        </div>
+
+        <div class="nav-btn nav-todo">
+            <div class="nav-content">TO-DO</div>
+        </div>
+
+        <div class="nav-btn nav-settings">
+            <div class="nav-icon">
+                <i class="fa-solid fa-gear"></i>
             </div>
         </div>
-        <img class="char-2-img" src="../static/images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png" />
 
-        <div class="speech-bubble char-3-bubble">
-            <div class="speech-text">📝 공부 중이에요!</div>
-        </div>
-        <div class="name-tag char-3-name">
-            <div class="name-tag-bg">
-                <div class="name-text">멍이</div>
-            </div>
-        </div>
-
-        <!-- Shadows -->
-        <div class="shadow shadow-1"></div>
-        <div class="shadow shadow-2"></div>
-        <div class="shadow shadow-3"></div>
-        <div class="shadow shadow-4"></div>
-
-        <!-- Top Icons -->
-        <div class="top-icon-btn top-icon-1">
-            <div class="icon-bg"></div>
-            <div class="icon-inner">
-                <div class="icon-shape" style="width: 20px; height: 20px; left: 2px; top: 2px;"></div>
-            </div>
-        </div>
-
-        <div class="top-icon-btn top-icon-2">
-            <div class="icon-bg"></div>
-            <div class="icon-inner">
-                <div class="icon-shape" style="width: 18px; height: 20px; left: 2px; top: 2px;"></div>
-            </div>
-        </div>
-
-        <div class="top-icon-btn top-icon-3">
-            <div class="icon-bg"></div>
-        </div>
-
-        <div class="top-icon-btn top-icon-4">
-            <div class="icon-bg"></div>
-            <div class="icon-inner" style="width: 24px; height: 22px; left: 12px; top: 13px; background: black;"></div>
-        </div>
-
-        <!-- Decorative Images -->
-        <img class="deco-img-1" src="../static/images/park/group_add_24dp_1F1F1F_FILL0_wght400_GRAD0_opsz24 1.png" />
-        <img class="deco-img-2" src="../static/images/park/ㄹㅇ상점 1.png" />
-        <img class="deco-img-3" src="../static/images/park/dreamina-2025-11-08-8642-Using image 1 as a reference, change the...-Photoroom 1.png" />
-        <img class="deco-img-4" src="../static/images/park/image-removebg-preview (8) 1.png" />
-        <img class="deco-img-5" src="../static/images/park/image-removebg-preview (8) 2.png" />
     </div>
 </body>
 

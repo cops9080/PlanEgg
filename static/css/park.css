@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 html,
 body {
@@ -18,317 +19,215 @@ body {
     height: 852px;
     position: relative;
     background: #E4EDD4;
+    /* 배경색 */
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.nav-button {
-    padding: 6px 20px;
+/* --- [1] 상단 버튼 스타일 --- */
+.top-btn {
     position: absolute;
-    top: 782px;
-    border-radius: 1000px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
+    top: 50px;
+    /* 상단 여백 */
+    width: 48px;
+    height: 48px;
     cursor: pointer;
+    z-index: 100;
 }
 
-.nav-button-bg {
+.icon-circle {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    left: 24px;
+}
+
+.top-right-group {
     position: absolute;
+    top: 50px;
+    right: 24px;
+    display: flex;
+    gap: 12px;
+}
+
+.top-right-group .top-btn {
+    position: relative;
     top: 0;
-    left: 0;
-    border-radius: 296px;
-    background: linear-gradient(0deg, #F7F7F7 0%, #F7F7F7 100%), rgba(255, 255, 255, 0.50), #333333;
-    background-blend-mode: linear_burn, normal, color_dodge;
+    right: 0;
 }
 
-.nav-text {
-    position: relative;
-    z-index: 1;
-    font-size: 16px;
-    font-family: SF Pro, sans-serif;
-    font-weight: 510;
-}
 
-.nav-todo {
-    left: 148px;
-    width: 95px;
-    height: 48px;
-}
-
-.nav-friends {
-    left: 22px;
-    width: 109px;
-    height: 48px;
-}
-
-.nav-menu {
-    left: 320px;
-    width: 56px;
-    height: 48px;
-}
-
-.menu-icon {
-    width: 30.30px;
-    height: 29.17px;
-    background: #404040;
-    position: relative;
-    z-index: 1;
-}
-
-.character-status {
+/* --- [2] 배경 장식 (나무, 상점) --- */
+.deco-shop {
     position: absolute;
-    color: white;
-    font-size: 12px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
+    top: 100px;
+    right: 40px;
+    width: 180px;
+    /* 크기 조절 */
+    z-index: 10;
+}
+
+.deco-tree-left {
+    position: absolute;
+    top: 120px;
+    left: 0px;
+    /* 화면 밖으로 살짝 나감 */
+    width: 150px;
+    z-index: 5;
+}
+
+.deco-tree-right {
+    position: absolute;
+    top: 380px;
+    right: 0px;
+    width: 100px;
+    z-index: 20;
+    /* 캐릭터보다 위에 올 수도 있음 */
+}
+
+
+/* --- [3] 캐릭터 공통 스타일 --- */
+.char-group {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 15;
 }
 
 .speech-bubble {
-    position: absolute;
-    height: 28px;
     background: white;
-    box-shadow: 0px 4px 6px -4px rgba(0, 0, 0, 0.10);
-    overflow: hidden;
-    border-radius: 10px;
-    outline: 2px #51A2FF solid;
-    outline-offset: -2px;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 2px solid #51A2FF;
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
 }
 
-.speech-text {
-    color: #1E2939;
-    font-size: 11px;
-    font-family: Arimo, sans-serif;
-    font-weight: 400;
-    line-height: 16px;
+.speech-bubble .emoji {
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.char-img {
+    width: 100px;
+    /* 기본 크기 */
+    object-fit: contain;
 }
 
 .name-tag {
-    position: absolute;
-    height: 24px;
-    padding-top: 2.67px;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.name-tag-bg {
-    align-self: stretch;
-    height: 21.33px;
-    position: relative;
     background: #155DFC;
-    overflow: hidden;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-}
-
-.name-text {
     color: white;
     font-size: 12px;
-    font-family: Arimo, sans-serif;
-    font-weight: 400;
-    line-height: 16px;
-}
-
-/* Specific Character Positions */
-.char-1-img {
-    left: 151px;
-    top: 608px;
-    width: 104px;
-    height: 104px;
-    position: absolute;
-}
-
-.char-1-status {
-    left: 228px;
-    top: 580px;
-    width: 83px;
-    height: 39px;
-}
-
-.char-1-bubble {
-    left: 146px;
-    top: 575px;
-    width: 113.54px;
-}
-
-.char-1-name {
-    left: 179px;
-    top: 596px;
-    width: 47.83px;
-}
-
-.char-2-status {
-    left: 101px;
-    top: 412px;
-    width: 83px;
-    height: 39px;
-}
-
-.char-2-bubble {
-    left: 57px;
-    top: 403px;
-    width: 113.54px;
-}
-
-.char-2-name {
-    left: 90px;
-    top: 419px;
-    width: 47.83px;
-}
-
-.char-2-img {
-    left: 68px;
-    top: 446px;
-    width: 80px;
-    height: 134px;
-    position: absolute;
-}
-
-.char-3-bubble {
-    left: 233px;
-    top: 294px;
-    width: 113.54px;
-}
-
-.char-3-name {
-    left: 263px;
-    top: 311px;
-    width: 47.83px;
-}
-
-/* Shadows */
-.shadow {
-    position: absolute;
-    background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, rgba(0, 0, 0, 0.50) 0%, rgba(102, 102, 102, 0) 100%);
-    border-radius: 9999px;
-    height: 21px;
-}
-
-.shadow-1 {
-    width: 91px;
-    height: 11px;
-    left: 66px;
-    top: 575px;
-}
-
-.shadow-2 {
-    width: 91px;
-    left: 159px;
-    top: 719px;
-}
-
-.shadow-3 {
-    width: 111px;
-    left: 228px;
-    top: 474px;
-}
-
-.shadow-4 {
-    width: 199px;
-    left: 206px;
-    top: 239px;
-}
-
-/* Top Icons */
-.top-icon-btn {
-    width: 48px;
-    height: 48px;
-    position: absolute;
-    top: 41px;
-    border-radius: 1000px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.icon-bg {
-    width: 48px;
-    height: 48px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 296px;
-    background: linear-gradient(0deg, #F7F7F7 0%, #F7F7F7 100%), rgba(255, 255, 255, 0.50), #333333;
-    background-blend-mode: linear_burn, normal, color_dodge;
-}
-
-.top-icon-1 {
-    left: 38px;
-}
-
-.top-icon-2 {
-    left: 323px;
-}
-
-.top-icon-3 {
-    left: 260px;
-}
-
-.top-icon-4 {
-    left: 197px;
-}
-
-.icon-inner {
-    width: 24px;
-    height: 24px;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.icon-shape {
-    background: black;
-    position: absolute;
-}
-
-/* Decorative Images */
-.deco-img-1 {
-    width: 29px;
-    height: 29px;
-    left: 332px;
-    top: 51px;
-    position: absolute;
+    padding: 4px 12px;
+    border-radius: 8px;
+    margin-top: -10px;
+    /* 캐릭터 발 쪽으로 올림 */
     z-index: 2;
 }
 
-.deco-img-2 {
-    width: 193px;
-    height: 193px;
-    left: 209px;
-    top: 89px;
-    position: absolute;
+.shadow {
+    width: 80px;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    margin-top: 4px;
+    filter: blur(2px);
 }
 
-.deco-img-3 {
-    width: 154px;
-    height: 154px;
-    left: 206px;
-    top: 336px;
-    position: absolute;
+/* 캐릭터별 개별 위치 및 크기 조정 */
+
+/* 멍이 (오른쪽 위 강아지) */
+.char-dog {
+    top: 300px;
+    left: 220px;
 }
 
-.deco-img-4 {
-    width: 272px;
-    height: 272px;
-    left: -123px;
-    top: 104px;
-    position: absolute;
+.char-dog .char-img {
+    width: 130px;
+    /* 강아지 크기 */
 }
 
-.deco-img-5 {
-    width: 220px;
-    height: 395px;
-    left: 292px;
-    top: 387px;
+/* 냥이 (왼쪽 중간 고양이) */
+.char-cat {
+    top: 440px;
+    left: 50px;
+}
+
+.char-cat .char-img {
+    width: 100px;
+}
+
+.char-cat .speech-bubble {
+    border-color: #51A2FF;
+    /* 파란 테두리 */
+}
+
+/* 포포 (아래쪽 유령) */
+.char-ghost {
+    top: 600px;
+    left: 140px;
+    /* 중앙 정렬 느낌 */
+}
+
+.char-ghost .char-img {
+    width: 110px;
+}
+
+
+/* --- [4] 하단 내비게이션 --- */
+.nav-btn {
     position: absolute;
+    bottom: 30px;
+    /* 하단에서의 거리 */
+    height: 48px;
+    border-radius: 24px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'SF Pro', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.nav-friends {
+    left: 20px;
+    width: 110px;
+}
+
+.nav-todo {
+    left: 140px;
+    width: 110px;
+}
+
+.nav-settings {
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* 원형 버튼 */
+}
+
+.nav-settings .nav-icon {
+    font-size: 20px;
+    color: #404040;
 }
