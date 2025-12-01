@@ -14,6 +14,11 @@ body {
     font-family: 'Arimo', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .park-container {
     width: 393px;
     height: 852px;

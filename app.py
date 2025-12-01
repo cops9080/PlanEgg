@@ -102,7 +102,101 @@ def market():
 
 @app.route('/park')
 def park():
+    print("Park route accessed")
     return render_template("park.html")
+
+@app.route('/user/<name>')
+def user(name):
+    friends_data = {
+        '멍이': {
+            'name': '멍이',
+            'status': '📝 공부 중이에요!',
+            'image': 'images/park/dreamina-2025-11-08-8642-Using image 1 as a reference, change the...-Photoroom 1.png',
+            'quest': '토익 공부하기',
+            'quest_time': '1:05',
+            'quest_exp': 15
+        },
+        '냥이': {
+            'name': '냥이',
+            'status': 'chill한 기분이에요',
+            'image': 'images/park/image 1.png',
+            'quest': '낮잠 자기',
+            'quest_time': '2:00',
+            'quest_exp': 10
+        },
+        '포포': {
+            'name': '포포',
+            'status': '아무 생각이 없어요',
+            'image': 'images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png',
+            'quest': '휴식 중',
+            'quest_time': '-',
+            'quest_exp': 0,
+            'quest_difficulty': 'Easy'
+        }
+    }
+    
+    if name == '포포':
+        conn = sqlite3.connect(DB_PATH)
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+        # Fetch the most recent active quest
+        c.execute('SELECT * FROM quests WHERE status = 1 ORDER BY id DESC LIMIT 1')
+        active_quest = c.fetchone()
+        conn.close()
+        
+        if active_quest:
+            friends_data['포포']['quest'] = active_quest['quest_name']
+            # Format time (assuming time_duration is in minutes)
+            friends_data['포포']['quest_time'] = f"{active_quest['time_duration']}분"
+            friends_data['포포']['quest_exp'] = active_quest['exp']
+            friends_data['포포']['quest_difficulty'] = active_quest['difficulty']
+    
+    friend = friends_data.get(name)
+    if not friend:
+        # Default fallback if name not found
+        friend = friends_data['멍이']
+        
+    return render_template("friend_detail.html", friend=friend)
+
+@app.route('/ranking')
+def ranking():
+    # Fetch real user stats
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    c.execute('SELECT * FROM user_stats WHERE id = 1')
+    user = c.fetchone()
+    conn.close()
+
+    if not user:
+        user = {'lvl': 1, 'exp': 0}
+
+    # Mock data for ranking
+    rankers = [
+        {
+            'name': '멍이',
+            'lvl': 5,
+            'exp': 350,
+            'image': url_for('static', filename='images/park/dreamina-2025-11-08-8642-Using image 1 as a reference, change the...-Photoroom 1.png')
+        },
+        {
+            'name': '냥이',
+            'lvl': 4,
+            'exp': 300,
+            'image': url_for('static', filename='images/park/image 1.png')
+        },
+        {
+            'name': '포포',
+            'lvl': user['lvl'],
+            'exp': user['exp'],
+            'image': url_for('static', filename='images/park/dreamina-2025-11-05-3975-Edit Image 1, remove the hat, and change...-Photoroom 1.png')
+        }
+    ]
+    
+    # Sort rankers by exp descending
+    rankers.sort(key=lambda x: x['exp'], reverse=True)
+    
+    return render_template("ranking.html", rankers=rankers)
 
 @app.route('/add_quest', methods=['POST'])
 def add_quest():
@@ -175,10 +269,29 @@ def delete_quest():
         # 2. Add to user stats (assuming user id 1)
         c.execute('UPDATE user_stats SET coin = coin + ?, exp = exp + ? WHERE id = 1', (coin_reward, exp_reward))
         
+        # Check for level up
+        c.execute('SELECT lvl, exp FROM user_stats WHERE id = 1')
+        row = c.fetchone()
+        current_lvl = row[0]
+        current_exp = row[1]
+        
+        leveled_up = False
+        while current_exp >= 100:
+            current_lvl += 1
+            current_exp -= 100
+            leveled_up = True
+            
+        if leveled_up:
+            c.execute('UPDATE user_stats SET lvl = ?, exp = ? WHERE id = 1', (current_lvl, current_exp))
+        
         # 3. Delete the quest
         c.execute('DELETE FROM quests WHERE id = ?', (quest_id,))
         conn.commit()
-        msg = f'퀘스트가 완료되었습니다! {coin_reward} 코인과 {exp_reward} 경험치를 획득했습니다.'
+        
+        if leveled_up:
+            msg = f'퀘스트 완료! {coin_reward} 코인, {exp_reward} 경험치 획득. 레벨업! Lv.{current_lvl} 달성!'
+        else:
+            msg = f'퀘스트가 완료되었습니다! {coin_reward} 코인과 {exp_reward} 경험치를 획득했습니다.'
     else:
         msg = '퀘스트를 찾을 수 없습니다.'
 

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ friend.name }}의 프로필</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/friend_detail.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="header">
+            <a href="{{ url_for('park') }}" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <!-- Other header icons can go here -->
+        </header>
+
+        <div class="profile-section">
+            <div class="status-bubble">
+                {{ friend.status }}
+            </div>
+            <img src="{{ url_for('static', filename=friend.image) }}" alt="{{ friend.name }}" class="profile-image">
+            <div class="profile-name-tag">{{ friend.name }}</div>
+            <div class="shadow-oval"></div>
+        </div>
+
+        <div class="quest-card-container">
+            <div class="quest-title">{{ friend.name }}의 퀘스트</div>
+
+            {% if friend.quest_exp > 0 %}
+            <div class="quest-item">
+                <div class="quest-icon">
+                    <i class="fa-solid fa-scroll"></i>
+                </div>
+                <div class="quest-info">
+                    <div class="quest-name">{{ friend.quest }}</div>
+                    <div class="quest-meta">
+                        <span class="tag difficulty">{{ friend.quest_difficulty }}</span>
+                        <span class="tag time">{{ friend.quest_time }}</span>
+                    </div>
+                </div>
+                <div class="quest-rewards">
+                    +{{ friend.quest_exp }} Exp
+                </div>
+                <div class="status-btn">
+                    <i class="fa-solid fa-play"></i> 진행 중
+                </div>
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 30px; color: #9CA3AF;">
+                <i class="fa-solid fa-bed" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                진행 중인 퀘스트가 없습니다
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

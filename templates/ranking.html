@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랭킹</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ranking.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <a href="{{ url_for('park') }}" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="page-title">랭킹</h1>
+            <div class="header-right"></div>
+        </header>
+
+        <!-- Tabs -->
+        <div class="ranking-tabs">
+            <button class="tab-btn active">이번 주</button>
+            <button class="tab-btn">전체</button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard-list">
+            {% for ranker in rankers %}
+            <div class="rank-card rank-{{ loop.index }} {% if loop.index <= 3 %}top-rank{% endif %}">
+                <div class="rank-number">{{ loop.index }}</div>
+
+                <div class="user-avatar-wrapper">
+                    {% if loop.index == 1 %}
+                    <i class="fa-solid fa-crown crown-icon"></i>
+                    {% endif %}
+                    <img src="{{ ranker.image }}" alt="{{ ranker.name }}" class="user-avatar">
+                </div>
+
+                <div class="user-info">
+                    <div class="user-name">{{ ranker.name }}</div>
+                    <div class="user-stats">
+                        <span class="stat-badge weekly">Lv. {{ ranker.lvl }}</span>
+                    </div>
+                </div>
+
+                <div class="exp-value">
+                    {{ ranker.exp }} Exp
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

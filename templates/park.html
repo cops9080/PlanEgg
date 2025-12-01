@@ -18,11 +18,11 @@
         </a>
 
         <div class="top-right-group">
-            <div class="top-btn stats-btn">
+            <a href="{{ url_for('ranking') }}" class="top-btn stats-btn">
                 <div class="icon-circle">
                     <i class="fa-solid fa-chart-simple"></i>
                 </div>
-            </div>
+            </a>
             <div class="top-btn share-btn">
                 <div class="icon-circle">
                     <i class="fa-solid fa-share-nodes"></i>
@@ -42,7 +42,7 @@
         <img class="deco-shop" src="{{ url_for('static', filename='images/park/ㄹㅇ상점 1.png') }}" />
 
 
-        <div class="char-group char-dog">
+        <a href="{{ url_for('user', name='멍이') }}" class="char-group char-dog">
             <div class="speech-bubble">
                 <span class="emoji">📝</span> 공부 중이에요!
             </div>
@@ -51,18 +51,18 @@
                 alt="멍이">
             <div class="name-tag">멍이</div>
             <div class="shadow"></div>
-        </div>
+        </a>
 
-        <div class="char-group char-cat">
+        <a href="{{ url_for('user', name='냥이') }}" class="char-group char-cat">
             <div class="speech-bubble">
                 chill한 기분이에요
             </div>
             <img class="char-img" src="{{ url_for('static', filename='images/park/image 1.png') }}" alt="냥이">
             <div class="name-tag">냥이</div>
             <div class="shadow"></div>
-        </div>
+        </a>
 
-        <div class="char-group char-ghost">
+        <a href="{{ url_for('user', name='포포') }}" class="char-group char-ghost">
             <div class="speech-bubble">
                 아무 생각이 없어요
             </div>
@@ -71,7 +71,7 @@
                 alt="포포">
             <div class="name-tag">포포</div>
             <div class="shadow"></div>
-        </div>
+        </a>
 
 
         <div class="nav-btn nav-friends">
