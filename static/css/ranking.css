@@ -1,0 +1,259 @@
+:root {
+    /* Color Palette - Consistent with main.css */
+    --primary-color: #84CC16;
+    /* Lime 500 */
+    --primary-dark: #65A30D;
+    /* Lime 600 */
+    --primary-light: #BEF264;
+    /* Lime 200 */
+    --secondary-color: #10B981;
+    /* Emerald 500 */
+
+    --bg-color: #F3F4F6;
+    /* Gray 100 */
+    --card-bg: #FFFFFF;
+    --text-main: #111827;
+    /* Gray 900 */
+    --text-secondary: #6B7280;
+    /* Gray 500 */
+    --text-light: #9CA3AF;
+    /* Gray 400 */
+
+    --gold: #F59E0B;
+    --silver: #9CA3AF;
+    --bronze: #B45309;
+
+    --nav-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+.app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    padding-bottom: calc(var(--nav-height) + 20px);
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+}
+
+/* Header */
+.header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(243, 244, 246, 0.9);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.back-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-main);
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+.back-btn:active {
+    transform: scale(0.95);
+}
+
+.page-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.header-right {
+    width: 40px;
+    /* Spacer for centering title */
+}
+
+/* Ranking Tabs */
+.ranking-tabs {
+    display: flex;
+    padding: 0 20px 20px;
+    gap: 10px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: white;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 10px rgba(132, 204, 22, 0.3);
+}
+
+/* Leaderboard List */
+.leaderboard-list {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rank-card {
+    background: white;
+    border-radius: 20px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.rank-card:hover {
+    transform: translateY(-2px);
+}
+
+.rank-card.top-rank {
+    border: 2px solid transparent;
+}
+
+.rank-card.rank-1 {
+    background: linear-gradient(to right, #FFFBEB, #FFFFFF);
+    border-color: var(--gold);
+}
+
+.rank-card.rank-2 {
+    background: linear-gradient(to right, #F9FAFB, #FFFFFF);
+    border-color: var(--silver);
+}
+
+.rank-card.rank-3 {
+    background: linear-gradient(to right, #FFF7ED, #FFFFFF);
+    border-color: var(--bronze);
+}
+
+.rank-number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.rank-1 .rank-number {
+    color: var(--gold);
+    font-size: 1.5rem;
+}
+
+.rank-2 .rank-number {
+    color: var(--silver);
+    font-size: 1.4rem;
+}
+
+.rank-3 .rank-number {
+    color: var(--bronze);
+    font-size: 1.3rem;
+}
+
+.user-avatar-wrapper {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.user-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.crown-icon {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: var(--gold);
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.user-info {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.user-stats {
+    display: flex;
+    gap: 8px;
+    font-size: 0.8rem;
+}
+
+.stat-badge {
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.stat-badge.weekly {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.stat-badge.total {
+    background-color: #E5E7EB;
+    color: var(--text-secondary);
+}
+
+.exp-value {
+    font-weight: 700;
+    color: var(--text-main);
+    margin-left: auto;
+}
