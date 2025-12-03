@@ -82,6 +82,9 @@ a {
     max-width: 180px;
     /* 크기 조절 */
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .deco-tree-left {
