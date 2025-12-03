@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quest Preview</title>
     <link rel="stylesheet" href="../static/css/quest_preview.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -57,6 +60,41 @@
         <div class="add_button">
             ADD QUEST
         </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="{{ url_for('home') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <span>홈</span>
+            </a>
+
+            <a href="{{ url_for('questlist') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <span>TO-DO</span>
+            </a>
+
+            <div class="nav-item-fab-wrapper">
+                <a href="{{ url_for('quest') }}" class="fab-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <a href="{{ url_for('park') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <span>친구</span>
+            </a>
+            <a href="{{ url_for('ranking') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <span>랭킹</span>
+            </a>
+        </nav>
     </div>
 
     <script src="../static/js/quest_preview.js"></script>

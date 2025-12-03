@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>광장</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/park.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -42,6 +43,7 @@
         <a href="{{ url_for('market') }}" class="deco-shop">
             <img src="{{ url_for('static', filename='images/park/ㄹㅇ상점 1.png') }}"
                 style="width: 100%; display: block;" />
+            <div class="name-tag">상점</div>
         </a>
 
 
@@ -77,19 +79,40 @@
         </a>
 
 
-        <div class="nav-btn nav-friends">
-            <div class="nav-content">FRIENDS</div>
-        </div>
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="{{ url_for('home') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <span>홈</span>
+            </a>
 
-        <a href="{{ url_for('questlist') }}" div class="nav-btn nav-todo">
-            <div class="nav-content">TO-DO</div>
-        </a>
+            <a href="{{ url_for('questlist') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <span>TO-DO</span>
+            </a>
 
-        <div class="nav-btn nav-settings">
-            <div class="nav-icon">
-                <i class="fa-solid fa-gear"></i>
+            <div class="nav-item-fab-wrapper">
+                <a href="{{ url_for('quest') }}" class="fab-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
             </div>
-        </div>
+            <a href="{{ url_for('park') }}" class="nav-item active">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <span>친구</span>
+            </a>
+            <a href="{{ url_for('ranking') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <span>랭킹</span>
+            </a>
+        </nav>
 
     </div>
     </div>
