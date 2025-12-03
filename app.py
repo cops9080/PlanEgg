@@ -301,6 +301,10 @@ def delete_quest():
 
     return jsonify({'message': msg}), 200
 
+@app.route('/room', methods=['GET'])
+def room():
+    return render_template('room.html')
+
 @app.route('/reset_db', methods=['POST'])
 def reset_db():
     conn = sqlite3.connect(DB_PATH)

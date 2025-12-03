@@ -1,0 +1,159 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #FFBB67;
+    overflow: hidden;
+    font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.room-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #FFBB67;
+    overflow: hidden;
+}
+
+.room-bg-shape {
+    width: 393px;
+    height: 485px;
+    left: 0px;
+    top: 367px;
+    position: absolute;
+    border-radius: 30px;
+    /* Add background color if needed, currently empty in HTML */
+}
+
+/* Navigation Buttons (Bottom) */
+.nav-btn-wrapper {
+    position: absolute;
+    top: 782px;
+    border-radius: 1000px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    display: inline-flex;
+    padding: 6px 20px;
+}
+
+/* Replaced nav-btn-bg with icon-circle style */
+.nav-btn-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Removed unused layers */
+
+.nav-text {
+    position: relative;
+    z-index: 1;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 510;
+    color: #404040;
+}
+
+.nav-todo {
+    left: 148px;
+    width: 95px;
+}
+
+.nav-friends {
+    left: 22px;
+    width: 109px;
+}
+
+.nav-icon-only {
+    left: 320px;
+    width: 56px;
+}
+
+/* Top Buttons */
+.top-btn {
+    position: absolute;
+    top: 41px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    /* Removed padding to fit circle */
+}
+
+.top-right-group {
+    position: absolute;
+    top: 41px;
+    right: 24px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+}
+
+.top-right-group .top-btn {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.btn-back {
+    left: 38px;
+}
+
+/* Removed absolute positioning for action buttons as they are now in the group */
+.btn-action-1 {
+    /* left: 258px; */
+}
+
+.btn-action-2 {
+    /* left: 318px; */
+}
+
+/* Icons */
+.icon-img {
+    position: absolute;
+    object-fit: contain;
+}
+
+.icon-back {
+    width: 24px;
+    height: 24px;
+    left: 50px;
+    top: 53px;
+}
+
+.icon-top-right-1 {
+    width: 25px;
+    height: 25px;
+    left: 330px;
+    top: 52px;
+}
+
+.icon-top-right-2 {
+    width: 24px;
+    height: 24px;
+    left: 267px;
+    top: 54px;
+}
+
+.main-image {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 217px;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: contain;
+}

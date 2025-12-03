@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>집</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/room.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="room-container">
+        <!-- Background Shape -->
+        <div class="room-bg-shape"></div>
+
+        <!-- Main Image -->
+        <img class="main-image" src="{{ url_for('static', filename='images/room/image-Photoroom (1) 1.png') }}"
+            alt="Room Image">
+
+        <!-- Back Button -->
+        <a href="javascript:history.back()" class="top-btn btn-back">
+            <div class="nav-btn-bg">
+                <div class="nav-btn-bg-layer1"></div>
+                <div class="nav-btn-bg-layer2"></div>
+                <div class="nav-btn-bg-layer3"></div>
+            </div>
+            <img src="{{ url_for('static', filename='images/room/arrow_back_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 2.svg') }}"
+                style="width: 24px; height: 24px; position: relative; z-index: 2;">
+        </a>
+
+        <!-- Top Right Group -->
+        <div class="top-right-group">
+            <!-- Settings Button -->
+            <div class="top-btn btn-action-1">
+                <div class="nav-btn-bg"></div>
+                <img src="{{ url_for('static', filename='images/room/settings_36dp_404040_FILL0_wght400_GRAD0_opsz40 1.svg') }}"
+                    style="width: 24px; height: 24px; position: relative; z-index: 2;">
+            </div>
+
+            <!-- Share Button -->
+            <div class="top-btn btn-action-2">
+                <div class="nav-btn-bg"></div>
+                <img src="{{ url_for('static', filename='images/room/share_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24 2.svg') }}"
+                    style="width: 24px; height: 24px; position: relative; z-index: 2;">
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="{{ url_for('home') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+                <span>홈</span>
+            </a>
+
+            <a href="{{ url_for('questlist') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <span>TO-DO</span>
+            </a>
+
+            <div class="nav-item-fab-wrapper">
+                <a href="{{ url_for('quest') }}" class="fab-btn">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+            <a href="{{ url_for('park') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-user-group"></i>
+                </div>
+                <span>친구</span>
+            </a>
+            <a href="{{ url_for('ranking') }}" class="nav-item">
+                <div class="nav-icon-wrapper">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <span>랭킹</span>
+            </a>
+        </nav>
+    </div>
+</body>
+
+</html>

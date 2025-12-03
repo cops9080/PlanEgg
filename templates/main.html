@@ -32,9 +32,16 @@
             <!-- Pet Section -->
             <section class="pet-card">
                 <div class="pet-header">
-                    <div class="level-badge">
-                        <span class="level-label">Lv</span>
-                        <span class="level-value">{{ user['lvl'] }}</span>
+                    <div class="status-badges" style="display: flex; gap: 8px;">
+                        <div class="level-badge">
+                            <span class="level-label">Lv</span>
+                            <span class="level-value">{{ user['lvl'] }}</span>
+                        </div>
+                        <div class="coin-badge"
+                            style="background: #FFFBEB; color: #D97706; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <i class="fa-solid fa-coins"></i>
+                            <span>{{ user['coin'] }}</span>
+                        </div>
                     </div>
                     <button class="pet-settings-btn"><i class="fa-solid fa-ellipsis"></i></button>
                 </div>
