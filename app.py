@@ -302,8 +302,15 @@ def delete_quest():
                 # Check for level up
                 c.execute('SELECT lvl, exp FROM user_stats WHERE id = 1')
                 row = c.fetchone()
-                current_lvl = row[0]
-                current_exp = row[1]
+                
+                if row:
+                    current_lvl = row[0]
+                    current_exp = row[1]
+                else:
+                    # Fallback if user stats don't exist (shouldn't happen normally)
+                    current_lvl = 1
+                    current_exp = 0
+                    c.execute('INSERT INTO user_stats (id, lvl, exp, coin) VALUES (1, 1, 0, 0)')
                 
                 leveled_up = False
                 while current_exp >= 100:
