@@ -9,34 +9,36 @@ DB_PATH = os.path.join(BASE_DIR, 'database.db')
 
 def init_db():
     print(f"Using database at: {DB_PATH}")
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS quests (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            quest_name TEXT NOT NULL,
-            difficulty TEXT NOT NULL,
-            time_duration INTEGER NOT NULL,
-            coin INTEGER NOT NULL,
-            exp INTEGER NOT NULL,
-            status INTEGER DEFAULT 0
-        )
-    ''')
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS user_stats (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            lvl INTEGER DEFAULT 1,
-            exp INTEGER DEFAULT 0,
-            coin INTEGER DEFAULT 0
-        )
-    ''')
-    # Initialize user stats if not exists
-    c.execute('SELECT count(*) FROM user_stats')
-    if c.fetchone()[0] == 0:
-        c.execute('INSERT INTO user_stats (lvl, exp, coin) VALUES (1, 0, 0)')
-    
-    conn.commit()
-    conn.close()
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            c = conn.cursor()
+            c.execute('''
+                CREATE TABLE IF NOT EXISTS quests (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    quest_name TEXT NOT NULL,
+                    difficulty TEXT NOT NULL,
+                    time_duration INTEGER NOT NULL,
+                    coin INTEGER NOT NULL,
+                    exp INTEGER NOT NULL,
+                    status INTEGER DEFAULT 0
+                )
+            ''')
+            c.execute('''
+                CREATE TABLE IF NOT EXISTS user_stats (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    lvl INTEGER DEFAULT 1,
+                    exp INTEGER DEFAULT 0,
+                    coin INTEGER DEFAULT 0
+                )
+            ''')
+            # Initialize user stats if not exists
+            c.execute('SELECT count(*) FROM user_stats')
+            if c.fetchone()[0] == 0:
+                c.execute('INSERT INTO user_stats (lvl, exp, coin) VALUES (1, 0, 0)')
+            
+            conn.commit()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
 
 @app.route('/')
 def main():
@@ -44,19 +46,25 @@ def main():
 
 @app.route('/home')
 def home():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    
-    # User 정보 가져오기
-    c.execute('SELECT * FROM user_stats WHERE id = 1')
-    user = c.fetchone()
-    
-    # 활성화된 퀘스트 가져오기
-    c.execute('SELECT * FROM quests WHERE status = 1')
-    active_quests = c.fetchall()
-    
-    conn.close()
+    user = None
+    active_quests = []
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            conn.row_factory = sqlite3.Row
+            c = conn.cursor()
+            
+            # User 정보 가져오기
+            c.execute('SELECT * FROM user_stats WHERE id = 1')
+            user = c.fetchone()
+            
+            # 활성화된 퀘스트 가져오기
+            c.execute('SELECT * FROM quests WHERE status = 1')
+            active_quests = c.fetchall()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        # Handle error gracefully, perhaps return an error page or default data
+        user = {'lvl': 1, 'exp': 0, 'coin': 0}
+        active_quests = []
     
     if not user:
         user = {'lvl': 1, 'exp': 0, 'coin': 0}
@@ -83,17 +91,22 @@ def quest():
 
 @app.route('/questlist')
 def questlist():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    c.execute('SELECT * FROM quests')
-    quests = c.fetchall()
+    quests = []
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            conn.row_factory = sqlite3.Row
+            c = conn.cursor()
+            c.execute('SELECT * FROM quests')
+            quests = c.fetchall()
+            
+            # Also fetch user stats to display if needed (optional)
+            # c.execute('SELECT * FROM user_stats WHERE id = 1')
+            # user = c.fetchone()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        # Handle error gracefully, perhaps return an error page or empty list
+        quests = []
     
-    # Also fetch user stats to display if needed (optional)
-    # c.execute('SELECT * FROM user_stats WHERE id = 1')
-    # user = c.fetchone()
-    
-    conn.close()
     return render_template("quest-main.html", quests=quests)
 
 @app.route('/market')
@@ -136,13 +149,17 @@ def user(name):
     }
     
     if name == '포포':
-        conn = sqlite3.connect(DB_PATH)
-        conn.row_factory = sqlite3.Row
-        c = conn.cursor()
-        # Fetch the most recent active quest
-        c.execute('SELECT * FROM quests WHERE status = 1 ORDER BY id DESC LIMIT 1')
-        active_quest = c.fetchone()
-        conn.close()
+        active_quest = None
+        try:
+            with sqlite3.connect(DB_PATH, timeout=5) as conn:
+                conn.row_factory = sqlite3.Row
+                c = conn.cursor()
+                # Fetch the most recent active quest
+                c.execute('SELECT * FROM quests WHERE status = 1 ORDER BY id DESC LIMIT 1')
+                active_quest = c.fetchone()
+        except sqlite3.OperationalError as e:
+            print(f"DB 잠금 실패: {e}")
+            # active_quest remains None, default values will be used
         
         if active_quest:
             friends_data['포포']['quest'] = active_quest['quest_name']
@@ -160,13 +177,18 @@ def user(name):
 
 @app.route('/ranking')
 def ranking():
-    # Fetch real user stats
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    c.execute('SELECT * FROM user_stats WHERE id = 1')
-    user = c.fetchone()
-    conn.close()
+    user = None
+    try:
+        # Fetch real user stats
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            conn.row_factory = sqlite3.Row
+            c = conn.cursor()
+            c.execute('SELECT * FROM user_stats WHERE id = 1')
+            user = c.fetchone()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        # Handle error gracefully, perhaps return default user stats
+        user = {'lvl': 1, 'exp': 0}
 
     if not user:
         user = {'lvl': 1, 'exp': 0}
@@ -221,12 +243,15 @@ def add_quest():
 
     exp = reward['exp']
 
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute('INSERT INTO quests (quest_name, difficulty, time_duration, coin, exp, status) VALUES (?, ?, ?, ?, ?, 0)',
-              (quest_name, difficulty, time_duration, coin, exp))
-    conn.commit()
-    conn.close()
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            c = conn.cursor()
+            c.execute('INSERT INTO quests (quest_name, difficulty, time_duration, coin, exp, status) VALUES (?, ?, ?, ?, ?, 0)',
+                      (quest_name, difficulty, time_duration, coin, exp))
+            conn.commit()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        return jsonify({'error': 'Database locked'}), 500
 
     return jsonify({'message': '퀘스트가 성공적으로 등록되었습니다!', 'coin': coin, 'exp': exp}), 201
 
@@ -239,11 +264,14 @@ def update_status():
     if quest_id is None or new_status is None:
         return jsonify({'error': 'Missing data'}), 400
 
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute('UPDATE quests SET status = ? WHERE id = ?', (new_status, quest_id))
-    conn.commit()
-    conn.close()
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            c = conn.cursor()
+            c.execute('UPDATE quests SET status = ? WHERE id = ?', (new_status, quest_id))
+            conn.commit()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        return jsonify({'error': 'Database locked'}), 500
 
     return jsonify({'message': 'Status updated successfully'}), 200
 
@@ -255,51 +283,53 @@ def delete_quest():
     if quest_id is None:
         return jsonify({'error': 'Missing data'}), 400
 
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    
-    # 1. Get quest rewards
-    c.execute('SELECT coin, exp FROM quests WHERE id = ?', (quest_id,))
-    quest = c.fetchone()
-    
-    if quest:
-        coin_reward = quest[0]
-        exp_reward = quest[1]
-        
-        # 2. Add to user stats (assuming user id 1)
-        c.execute('UPDATE user_stats SET coin = coin + ?, exp = exp + ? WHERE id = 1', (coin_reward, exp_reward))
-        
-        # Check for level up
-        c.execute('SELECT lvl, exp FROM user_stats WHERE id = 1')
-        row = c.fetchone()
-        current_lvl = row[0]
-        current_exp = row[1]
-        
-        leveled_up = False
-        while current_exp >= 100:
-            current_lvl += 1
-            current_exp -= 100
-            leveled_up = True
+    msg = '퀘스트를 찾을 수 없습니다.' # Default message
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            c = conn.cursor()
             
-        if leveled_up:
-            c.execute('UPDATE user_stats SET lvl = ?, exp = ? WHERE id = 1', (current_lvl, current_exp))
-        
-        # 3. Delete the quest
-        c.execute('DELETE FROM quests WHERE id = ?', (quest_id,))
-        conn.commit()
-        
-        if leveled_up:
-            msg = f'퀘스트 완료! {coin_reward} 코인, {exp_reward} 경험치 획득. 레벨업! Lv.{current_lvl} 달성!'
-        else:
-            msg = f'퀘스트가 완료되었습니다! {coin_reward} 코인과 {exp_reward} 경험치를 획득했습니다.'
-    else:
-        msg = '퀘스트를 찾을 수 없습니다.'
+            # 1. Get quest rewards
+            c.execute('SELECT coin, exp FROM quests WHERE id = ?', (quest_id,))
+            quest = c.fetchone()
+            
+            if quest:
+                coin_reward = quest[0]
+                exp_reward = quest[1]
+                
+                # 2. Add to user stats (assuming user id 1)
+                c.execute('UPDATE user_stats SET coin = coin + ?, exp = exp + ? WHERE id = 1', (coin_reward, exp_reward))
+                
+                # Check for level up
+                c.execute('SELECT lvl, exp FROM user_stats WHERE id = 1')
+                row = c.fetchone()
+                current_lvl = row[0]
+                current_exp = row[1]
+                
+                leveled_up = False
+                while current_exp >= 100:
+                    current_lvl += 1
+                    current_exp -= 100
+                    leveled_up = True
+                    
+                if leveled_up:
+                    c.execute('UPDATE user_stats SET lvl = ?, exp = ? WHERE id = 1', (current_lvl, current_exp))
+                
+                # 3. Delete the quest
+                c.execute('DELETE FROM quests WHERE id = ?', (quest_id,))
+                conn.commit()
+                
+                if leveled_up:
+                    msg = f'퀘스트 완료! {coin_reward} 코인, {exp_reward} 경험치 획득. 레벨업! Lv.{current_lvl} 달성!'
+                else:
+                    msg = f'퀘스트가 완료되었습니다! {coin_reward} 코인과 {exp_reward} 경험치를 획득했습니다.'
+            else:
+                msg = '퀘스트를 찾을 수 없습니다.'
+                
+        return jsonify({'message': msg}), 200
 
-    conn.close()
-
-
-
-    return jsonify({'message': msg}), 200
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        return jsonify({'error': 'Database locked'}), 500
 
 @app.route('/room', methods=['GET'])
 def room():
@@ -307,17 +337,20 @@ def room():
 
 @app.route('/reset_db', methods=['POST'])
 def reset_db():
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    
-    # Reset user stats
-    c.execute('UPDATE user_stats SET lvl = 1, exp = 0, coin = 0 WHERE id = 1')
-    
-    # Delete all quests
-    c.execute('DELETE FROM quests')
-    
-    conn.commit()
-    conn.close()
+    try:
+        with sqlite3.connect(DB_PATH, timeout=5) as conn:
+            c = conn.cursor()
+            
+            # Reset user stats
+            c.execute('UPDATE user_stats SET lvl = 1, exp = 0, coin = 0 WHERE id = 1')
+            
+            # Delete all quests
+            c.execute('DELETE FROM quests')
+            
+            conn.commit()
+    except sqlite3.OperationalError as e:
+        print(f"DB 잠금 실패: {e}")
+        return jsonify({'error': 'Database locked'}), 500
     
     return jsonify({'message': '데이터가 초기화되었습니다.'}), 200
 
